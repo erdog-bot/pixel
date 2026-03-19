@@ -13,10 +13,10 @@ do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
 device.name1=lga
-device.name2=lga_num
-device.name3=
-device.name4=
-device.name5=
+device.name2=muzel
+device.name3=akita
+device.name4=shusky
+device.name5=caimito
 supported.versions=15-
 supported.patchlevels=
 '; }
