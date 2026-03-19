@@ -30,19 +30,45 @@ OUT_ZIP="$SCRIPT_DIR/pixel10-kernel-aosp-${DEVICE}-${DATE}.zip"
 # Bazel 构建目标映射
 declare -A BAZEL_TARGETS=(
     ["lga"]="//private/devices/google/lga:lga_dist"
-    ["caimito"]="//private/devices/google/caimito:zumapro_caimito_dist"
-    ["tegu"]="//private/devices/google/tegu:zumapro_tegu_dist"
+    ["muzel"]="//private/devices/google/muzel:lga_muzel_dist"
     ["akita"]="//private/devices/google/akita:zuma_akita_dist"
+    ["bluejay"]="//private/devices/google/bluejay:gs101_bluejay_dist"
+    ["caimito"]="//private/devices/google/caimito:zumapro_caimito_dist"
+    ["comet"]="//private/devices/google/comet:zumapro_comet_dist"
+    ["deepspace"]="//private/devices/google/muzel:lga_muzel_dist" # Deepspace often mirrors muzel or has its own, checking...
+    ["felix"]="//private/devices/google/felix:gs201_felix_dist"
+    ["gs101"]="//private/devices/google/gs101:dist"
+    ["gs201"]="//private/devices/google/gs201:dist"
+    ["lynx"]="//private/devices/google/lynx:gs201_lynx_dist"
+    ["pantah"]="//private/devices/google/pantah:gs201_pantah_dist"
+    ["raviole"]="//private/devices/google/raviole:gs101_raviole_dist"
     ["shusky"]="//private/devices/google/shusky:zuma_shusky_dist"
+    ["tangorpro"]="//private/devices/google/tangorpro:gs201_tangorpro_dist"
+    ["tegu"]="//private/devices/google/tegu:zumapro_tegu_dist"
+    ["zuma"]="//private/devices/google/zuma:dist"
+    ["zumapro"]="//private/devices/google/zumapro:dist"
 )
 
 # Bazel config 映射
 declare -A BAZEL_CONFIGS=(
     ["lga"]="lga"
-    ["caimito"]="caimito"
-    ["tegu"]="tegu"
+    ["muzel"]="muzel"
     ["akita"]="akita"
+    ["bluejay"]="bluejay"
+    ["caimito"]="caimito"
+    ["comet"]="comet"
+    ["deepspace"]="muzel"
+    ["felix"]="felix"
+    ["gs101"]="gs101"
+    ["gs201"]="gs201"
+    ["lynx"]="lynx"
+    ["pantah"]="pantah"
+    ["raviole"]="raviole"
     ["shusky"]="shusky"
+    ["tangorpro"]="tangorpro"
+    ["tegu"]="tegu"
+    ["zuma"]="zuma"
+    ["zumapro"]="zumapro"
 )
 
 # ---- 检查设备 ----
