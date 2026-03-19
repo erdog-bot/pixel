@@ -55,7 +55,16 @@ jobs:
 
       - name: ⚙️ Build Kernel and Package AnyKernel3
         run: |
-          # 0. Create dummy prebuilt symlinks if missing (fix Kleaf 127)
+          # 0. Debug and Fix (Force patch bazel.sh in CI)
+          echo "Checking bazel.sh content on runner:"
+          grep "python3" build/kernel/kleaf/bazel.sh || echo "Line not found"
+          
+          # Force patch to use system python3 if prebuilt is missing
+          sed -i 's|exec "$KLEAF_REPO_DIR"/prebuilts/build-tools/path/linux-x86/python3|PYTHON="$KLEAF_REPO_DIR"/prebuilts/build-tools/path/linux-x86/python3; if [ ! -f "$PYTHON" ]; then PYTHON=$(which python3); fi; exec "$PYTHON"|' build/kernel/kleaf/bazel.sh
+          
+          echo "Verified bazel.sh after patch:"
+          grep "PYTHON=" build/kernel/kleaf/bazel.sh
+
           mkdir -p prebuilts/build-tools/path/linux-x86
           if [ ! -f prebuilts/build-tools/path/linux-x86/python3 ]; then
             ln -sf $(which python3) prebuilts/build-tools/path/linux-x86/python3
@@ -64,6 +73,7 @@ jobs:
           # 1. Setup AnyKernel3 tools
           chmod +x setup_tools.sh make_zip.sh build_kernel_and_package.sh
           chmod +x build/kernel/kleaf/bazel.sh || true
+          chmod +x tools/bazel || true
           ./setup_tools.sh
 
           # 2. Build kernel using the unified script
