@@ -1,0 +1,9 @@
+#!/sbin/sh
+# AnyKernel3 update-binary (stub)
+# Delegates to the AnyKernel3 shell script
+
+SKIPUNZIP=1
+. /tmp/anykernel/tools/ak3-core.sh
+
+# Run the main AnyKernel3 script
+. /tmp/anykernel/anykernel.sh
