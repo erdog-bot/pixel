@@ -15,4 +15,10 @@
 
 KLEAF_REPO_DIR=$($(dirname $(dirname $(readlink -f "$0")))/gettop.sh)
 
-exec "$KLEAF_REPO_DIR"/prebuilts/build-tools/path/linux-x86/python3 $(dirname $(readlink -f "$0"))/bazel.py "$KLEAF_REPO_DIR" "$@"
+PYTHON="$KLEAF_REPO_DIR"/prebuilts/build-tools/path/linux-x86/python3
+if [ ! -f "$PYTHON" ]; then
+  PYTHON=$(which python3)
+  echo "Warning: Prebuilt python3 not found, using system $PYTHON"
+fi
+
+exec "$PYTHON" $(dirname $(readlink -f "$0"))/bazel.py "$KLEAF_REPO_DIR" "$@"

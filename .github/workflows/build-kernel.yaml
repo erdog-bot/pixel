@@ -55,6 +55,12 @@ jobs:
 
       - name: ⚙️ Build Kernel and Package AnyKernel3
         run: |
+          # 0. Create dummy prebuilt symlinks if missing (fix Kleaf 127)
+          mkdir -p prebuilts/build-tools/path/linux-x86
+          if [ ! -f prebuilts/build-tools/path/linux-x86/python3 ]; then
+            ln -sf $(which python3) prebuilts/build-tools/path/linux-x86/python3
+          fi
+
           # 1. Setup AnyKernel3 tools
           chmod +x setup_tools.sh make_zip.sh build_kernel_and_package.sh
           chmod +x build/kernel/kleaf/bazel.sh || true
