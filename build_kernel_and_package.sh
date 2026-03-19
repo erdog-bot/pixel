@@ -100,7 +100,9 @@ fi
 echo "==> 开始编译内核（设备: $DEVICE）..."
 cd "$SCRIPT_DIR"
 
-tools/bazel run \
+chmod +x ./tools/bazel 2>/dev/null || true
+
+./tools/bazel run \
     --config=stamp \
     --config="${CONFIG}" \
     "${TARGET}"

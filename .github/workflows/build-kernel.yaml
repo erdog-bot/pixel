@@ -40,18 +40,27 @@ jobs:
       - name: 🧱 Prepare environment
         run: |
           sudo apt update
-          sudo apt install -y git python3 gnupg flex bison build-essential libssl-dev \
+          sudo apt install -y git python3 python-is-python3 gnupg flex bison build-essential libssl-dev \
             libncurses-dev zip unzip curl zlib1g-dev libc6-dev-i386 x11proto-core-dev libx11-dev \
             lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig repo
+
+      - name: 🔍 Debug Environment
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -l setup_tools.sh make_zip.sh build_kernel_and_package.sh
+          ls -l tools/bazel
+          ls -l build/kernel/kleaf/bazel.sh || echo "build/ directory missing!"
+          which python
+          python --version
 
       - name: ⚙️ Build Kernel and Package AnyKernel3
         run: |
           # 1. Setup AnyKernel3 tools
           chmod +x setup_tools.sh make_zip.sh build_kernel_and_package.sh
+          chmod +x build/kernel/kleaf/bazel.sh || true
           ./setup_tools.sh
 
           # 2. Build kernel using the unified script
-          # This script handles Bazel build and copies Image to magisk_package/
           ./build_kernel_and_package.sh ${{ github.event.inputs.device }}
 
           # 3. zip will be created by build_kernel_and_package.sh (which calls make_zip.sh)
